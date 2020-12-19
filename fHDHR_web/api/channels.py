@@ -102,7 +102,16 @@ class Channels():
             self.fhdhr.device.channels.set_channel_status("id", channel_id, updatedict)
 
         elif method == "modify":
-            channels_list = request.form.get('channels', [])
+            channels_list = []
+            tempList = request.form.getlist('channels')
+
+            for i in tempList:
+                chanList = i.split('|')
+                for chan in chanList:
+                   intern_dict = {}
+                   intern_dict = json.loads(chan)
+                   channels_list.append(intern_dict)
+
             for channel in channels_list:
                 updatedict = {}
                 for key in list(channel.keys()):
@@ -125,7 +134,7 @@ class Channels():
                             updatedict[key] = confvalue
                         elif key in ["favorite", "HD"]:
                             updatedict[key] = int(channel[key])
-                self.fhdhr.device.channels.set_channel_status("id", channel_id, updatedict)
+                self.fhdhr.device.channels.set_channel_status("id", channel['id'], updatedict)
 
         elif method == "scan":
             self.fhdhr.device.channels.get_channels(forceupdate=True)
