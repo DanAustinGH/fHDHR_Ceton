@@ -98,18 +98,18 @@
          <div class="rTableRowAlternate">
     {% endif %}
              <input type="hidden" name="id" class="channels" value={{ chan_dict["id"] }}>
-             <div class="rTableCell"><input type="text" class="channels" name="name" value={{ chan_dict["name"] }}></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="callsign" value={{ chan_dict["callsign"] }}></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="number" value={{ chan_dict["number"] }}></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="thumbnail" value={{ chan_dict["thumbnail"] }}></div>
-             <div class="rTableCell">
+             <div class="rTableCell"><input type="text" class="channels" name="name" value="{{ chan_dict["name"] }}"></div>
+             <div class="rTableCell"><input type="text"  class="channels" name="callsign" value="{{ chan_dict["callsign"] }}"></div>
+             <div class="rTableCell"><input type="text"  class="channels" name="number" value="{{ chan_dict["number"] }}"></div>
+             <div class="rTableCell"><input type="text"  class="channels" name="thumbnail" value="{{ chan_dict["thumbnail"] }}"></div>
+             <div class="rTableCell" style="text-align:auto">
               {% if chan_dict["enabled"]  %}
                     <input type="checkbox"  class="channels" name="enabled" style="center" value=True checked>
               {% else %}
                     <input type="checkbox"  class="channels" name="enabled" style="center" value=True >
               {% endif %}
              </div>
-             <div class="rTableCell"</div>
+             <div class="rTableCell" style="text-align:auto">
               {% if chan_dict["favorite"]  %}
                     <input type="checkbox"  class="channels" name="favorite" style="margin: auto;" value=1 checked>
               {% else %}
@@ -117,14 +117,15 @@
               {% endif %}
              </div>
              <div class="rTableCell"> 
-		<form method="post" action="/api/channels?method=update&redirect=%2Fchannels_editor">
-                <input type="hidden" class="reset" name="id" value={{ chan_dict["id"] }}>
-                <input type="hidden" class="reset" name="name" value={{ chan_dict["origin_name"] }}>
-                <input type="hidden" class="reset" name="callsign" value={{ chan_dict["origin_callsign"] }}>
-                <input type="hidden" class="reset" name="number" value={{ chan_dict["origin_number"] }}>
-                <input type="hidden" class="reset" name="thumbnail" value={{ chan_dict["origin_thumbnail"] }}>
+             <form method="post" action="/api/channels?method=update&redirect=%2Fchannels_editor">
+                <input type="hidden" class="reset" name="id" value="{{ chan_dict["id"] }}">
+                <input type="hidden" class="reset" name="name" value="{{ chan_dict["origin_name"] }}">
+                <input type="hidden" class="reset" name="callsign" value="{{ chan_dict["origin_callsign"] }}">
+                <input type="hidden" class="reset" name="number" value="{{ chan_dict["origin_number"] }}">
+                <input type="hidden" class="reset" name="thumbnail" value="{{ chan_dict["origin_thumbnail"] }}">
                 <input type="hidden" class="reset" name="enabled" value=True>
-		<input type="submit"  value="Reset"></form></div>
+                <input type="submit"  value="Reset">
+             </form></div>
          </div>
 
     {% set rowCount.value = rowCount.value+ 1 %}
