@@ -4,38 +4,39 @@
 
     <h4 style="text-align: center;">{{ fhdhr.config.dict["main"]["servicename"] }} Status</h4>
 
-      <table class="center" style="width:50%">
-        <tr>
-        <tr>
-          <td>Setup</td>
-          <td>{{ origin_status_dict['Setup'] }}</td>
-        </tr>
-        <tr>
-          <td>Temperature</td>
-          <td>{{ origin_status_dict['Temp'] }}</td>
-        </tr>
+        <div class="rTable center" style="width:20%">
+          <div class="rTableRow">
+             <div class="rTableCell"><td>Setup</div>
+	     <div class="rTableCell"><td>{{ origin_status_dict['Setup'] }}</div>
+           </div>
+           <div class="rTableRow">
+             <div class="rTableCell"><td>Temperature</div>
+             <div class="rTableCell"><td>{{ origin_status_dict['Temp'] }}</div>
+           </div>
+        </div>
 
-      <table class="center" style="width:50%">
-	  <tr>
-            <td>Tuner</td>
-	    <td>State</td>
-	    <td>Signal</td>
-	    <td>SNR</td>
-	    <td>Action</td>
+	<div class="rTable center" style="width:50%">
+	  <div class="rTableHeading">
+            <div class="rTableHead">Tuner</div>
+	    <div class="rTableHead">State</div>
+	    <div class="rTableHead">Signal</div>
+	    <div class="rTableHead">SNR</div>
+	    <div class="rTableHead">Action</div>
+	  </div>
       {% for key in list(origin_status_dict.keys()) 
       if "Tuner" in key: %}
-        <tr>
-          <td>{{ key[5:]  }}</td>
-          <td>{{ origin_status_dict[key]['State'] }}</td>
-          <td>{{ origin_status_dict[key]['Signal'] }}</td>
-          <td>{{ origin_status_dict[key]['SNR'] }}</td>
+         <div class="rTableRow">
+           <div class="rTableCell">{{ key[5:]  }}</div>
+           <div class="rTableCell">{{ origin_status_dict[key]['State'] }}</div>
+           <div class="rTableCell">{{ origin_status_dict[key]['Signal'] }}</div>
+           <div class="rTableCell">{{ origin_status_dict[key]['SNR'] }}</div>
 	  {% if origin_status_dict[key]['State'] == "STOPPED" %}
-	     <td></td>
+            <div class="rTableCell"></div>
 	  {% endif %}
 	  {% if origin_status_dict[key]['State'] == "PLAYING" %}
-	     <td><button onclick="OpenLink('/api/origin?method=close&tuner={{ key[5:] }}&redirect=%2Forigin')">Close</a></button></td>
+           <div class="rTableCell"><button onclick="OpenLink('/api/origin?method=close&tuner={{ key[5:] }}&redirect=%2Forigin')">Close</a></button></div>
 	  {% endif %}
-        </tr>
+        </div>
       {% endfor %}
-
+     </div>
 {% endblock %}

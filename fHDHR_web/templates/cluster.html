@@ -14,22 +14,21 @@
       </div>
       <br>
 
-      <table class="center" style="width:50%">
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Joined</th>
-          <th>Options</th>
-        </tr>
+    <div class="rTable center" style="width:50%">
+      <div class="rTableHeading">
+          <div class="rTableHead">Name</div>
+	  <div class="rTableHead">Location</div>
+	  <div class="rTableHead">Joined</div>
+	  <div class="rTableHead">Options</div>
+        </div>
 
       {% for location in locations_list %}
-        <tr>
-          <td>{{ location["name"] }}</td>
-          <td>{{ location["location"] }}</td>
-          <td>{{ location["joined"] }}</td>
+        <div class="rTableRow">
+	    <div class="rTableCell">{{ location["name"] }}</div>
+            <div class="rTableCell">{{ location["location"] }}</div>
+	    <div class="rTableCell">{{ location["joined"] }}</div>
 
-          <td>
-            <div>
+            <div class="rTableCell"> 
 
               {% if location["joined"] in ["True", "False"] %}
                 <button onclick="OpenLink('{{ location["location"] }}')">Visit</a></button>
@@ -42,10 +41,9 @@
               {% endif %}
 
             </div>
-          </td>
-        </tr>
+          </div>
       {% endfor %}
-
+    </div>
     {% endif %}
 
 {% endblock %}

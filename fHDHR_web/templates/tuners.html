@@ -4,46 +4,49 @@
 
     <h4 style="text-align: center;">fHDHR Streams</h4>
 
-      <table class="center" style="width:100%">
-        <tr>
-          <th>Tuner</th>
-          <th>Status</th>
-          <th>Channel</th>
-          <th>Method</th>
-          <th>Time Active</th>
-          <th>Total Downloaded</th>
-          <th>Options</th>
-        </tr>
+    <div class="rTable center" style="width:50%">
+      <div class="rTableHeading">
+          <div class="rTableHead">Status</div>
+          <div class="rTableHead">Channel</div>
+          <div class="rTableHead">Method</div>
+          <div class="rTableHead">Time Active</div>
+          <div class="rTableHead">Total Downloaded</div>
+          <div class="rTableHead">Options</div>
+          <div class="rTableHead">Action</div>
+        </div>
 
+      {% set rowCount = namespace(value=1) %}
       {% for tuner_dict in tuner_list %}
-        <tr>
-          <td>{{ tuner_dict["number"] }}</td>
-          <td>{{ tuner_dict["status"] }}</td>
+      {% if (rowCount.value % 2) %}
+         <div class="rTableRow">
+      {% else %}
+         <div class="rTableRowAlternate">
+      {% endif %}
+          <div class="rTableCell">{{ tuner_dict["number"] }}</div>
+          <div class="rTableCell">{{ tuner_dict["status"] }}</div>
           {% if tuner_dict["status"] in ["Active", "Acquired"] %}
-            <td>{{ tuner_dict["channel_number"] }}</td>
+          <div class="rTableCell">{{ tuner_dict["channel_number"] }}</div>
           {% else %}
-            <td>N/A</td>
+          <div class="rTableCell">N/A</div>
           {% endif %}
           {% if tuner_dict["status"] == "Active" %}
-            <td>{{ tuner_dict["method"] }}</td>
-            <td>{{ tuner_dict["play_duration"] }}</td>
-            <td>{{ tuner_dict["downloaded"] }}</td>
+          <div class="rTableCell">{{ tuner_dict["method"] }}</div>
+          <div class="rTableCell">{{ tuner_dict["play_duration"] }}</div>
+          <div class="rTableCell">{{ tuner_dict["downloaded"] }}</div>
           {% else %}
-            <td>N/A</td>
-            <td>N/A</td>
-            <td>N/A</td>
+          <div class="rTableCell">N/A</div>
+          <div class="rTableCell">N/A</div>
+          <div class="rTableCell">N/A</div>
           {% endif %}
-          <td>
-            <div>
+          <div class="rTableCell">
               {% if tuner_dict["status"] != "Inactive" %}
                 <button onclick="OpenLink('/api/tuners?method=close&tuner={{ tuner_dict["number"] }}&redirect=%2Ftuners')">Close</a></button>
               {% endif %}
               {% if not tuner_scanning and tuner_dict["status"] == "Inactive" %}
                 <button onclick="OpenLink('/api/tuners?method=scan&tuner={{ tuner_dict["number"] }}&redirect=%2Ftuners')">Channel Scan</a></button>
               {% endif %}
-            </div>
-          </td>
-        </tr>
+          </div>
+        </div>
       {% endfor %}
 
 {% endblock %}

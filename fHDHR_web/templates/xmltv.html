@@ -4,13 +4,13 @@
 
     <h4 style="text-align: center;">xmltv</h4>
 
-    <table class="center" style="width:50%">
-      <tr>
-        <th>Version</th>
-        <th>XMLTV Link</th>
-        <th>EPG Link</th>
-        <th>Options</th>
-      </tr>
+    <div class="rTable center" style="width:50%">
+      <div class="rTableHeading">
+        <div class="rTableHead">Version</div>
+	<div class="rTableHead">XMLTV Link</div>
+	<div class="rTableHead">EPG Link</div>
+	<div class="rTableHead">Options</div>
+      </div>
 
     {% for epg_method in fhdhr.config.dict["epg"]["valid_epg_methods"] %}
       {% if epg_method not in [None, "None"] %}
@@ -19,20 +19,20 @@
           {% set epg_method_name = fhdhr.config.dict["main"]["dictpopname"] %}
         {% endif %}
 
-        <tr>
-          <td>{{ epg_method_name }}</td>
-          <td><a href="/api/xmltv?method=get&source={{ epg_method }}">{{ epg_method_name }}</a></td>
-          <td><a href="/api/epg?method=get&source={{ epg_method }}">{{ epg_method_name }}</a></td>
-          <td>
-            <div>
+        <div class="rTableRow">
+           <div class="rTableCell"> {{ epg_method_name }}</div>
+	   <div class="rTableCell"><a href="/api/xmltv?method=get&source={{ epg_method }}">{{ epg_method_name }}</a></div>
+	   <div class="rTableCell"><a href="/api/epg?method=get&source={{ epg_method }}">{{ epg_method_name }}</a></div>
+          
+	   <div class="rTableCell">
               <button onclick="OpenLink('/api/xmltv?method=update&source={{ epg_method }}&redirect=%2Fxmltv')">Update</a></button>
               <button onclick="OpenLink('/api/xmltv?method=clearcache&source={{ epg_method }}&redirect=%2Fxmltv')">Clear Cache</a></button>
-            </div>
-          </td>
-        </tr>
+           </div>
+        </div>
 
 
       {% endif %}
-    {% endfor %}
 
+    {% endfor %}
+    </div>
 {% endblock %}
