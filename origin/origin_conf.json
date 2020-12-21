@@ -33,7 +33,7 @@
                   "config_web": true
                 },
           "stream_type":{
-                  "value": ffmpeg,
+                  "value": "ffmpeg",
                   "config_file": true,
                   "config_web": true
                 },
