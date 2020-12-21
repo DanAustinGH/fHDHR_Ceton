@@ -26,27 +26,6 @@
            document["enable_button"].text = "Disable All"
 
 
-       @bind("#chanReset", "click")
-       def chan_reset(evt):
-          postForm = document.createElement('form')
-
-          items = document.select(".reset")
-          for element in items:
-              postForm.appendChild(element)
-
-
-          postForm.method = "POST"
-          postForm.action = "/api/channels?method=update&redirect=%2Fchannels_editor"
-          postForm.setRequestHeader = "('Content-Type', 'application/json')"
-
-          document.body.appendChild(postForm)
-
-          postForm.submit()
-
-          evt.preventDefault()
-
-
-
        @bind("#chanSubmit", "submit")
        def submit_fixup(evt):
           for element in document.get(selector='input[type="checkbox"]'):
@@ -95,6 +74,7 @@
        <form id="chanSubmit" method="post">
        <button type="Submit" id="modify_button" value="0">Modify All</button>
        <button type="button" id="enable_button" value="0">Disable All</button>
+       </form>
     </div>
 
 
@@ -136,18 +116,18 @@
                     <input type="checkbox"  class="channels" name="favorite" style="margin: auto;" value=1 >
               {% endif %}
              </div>
-             <div class="rTableCell"> <button id="chanReset" class="reset">Reset</button> </div>
+             <div class="rTableCell"> 
+		<form method="post" action="/api/channels?method=update&redirect=%2Fchannels_editor">
                 <input type="hidden" class="reset" name="id" value={{ chan_dict["id"] }}>
                 <input type="hidden" class="reset" name="name" value={{ chan_dict["origin_name"] }}>
                 <input type="hidden" class="reset" name="callsign" value={{ chan_dict["origin_callsign"] }}>
                 <input type="hidden" class="reset" name="number" value={{ chan_dict["origin_number"] }}>
                 <input type="hidden" class="reset" name="thumbnail" value={{ chan_dict["origin_thumbnail"] }}>
                 <input type="hidden" class="reset" name="enabled" value=True>
-
+		<input type="submit"  value="Reset"></form></div>
          </div>
 
     {% set rowCount.value = rowCount.value+ 1 %}
     {% endfor %}
     </div>
-    </form>
 {% endblock %}
