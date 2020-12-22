@@ -4,13 +4,19 @@
 
     <h4 style="text-align: center;">fHDHR Version Information</h4>
 
-    <div class="rTable center" style="width:50%">
+
+    <div class=container">
+    <table class="table-medium center">
+    <tbody>
 
       {% for key in list(version_dict.keys()) %}
-        <div class="rTableRow">
-          <div class="rTableCell">{{ key }}</div>
-          <div class="rTableCell">{{ version_dict[key] }}</div>
-        </div>
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ version_dict[key] }}</td>
+        </tr>
       {% endfor %}
+    </tbody>
+    </table>
+    </div>
 
 {% endblock %}

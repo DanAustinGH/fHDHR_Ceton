@@ -4,14 +4,19 @@
 
     <h4 style="text-align: center;">fHDHR Status</h4>
 
-    <div class="rTable center" style="width:50%">
+
+    <td class=container">
+    <table class="table-medium center">
+    <tbody>
 
       {% for key in list(fhdhr_status_dict.keys()) %}
-        <div class="rTableRow">
-          <div class="rTableCell">{{ key }}</div>
-          <div class="rTableCell">{{ fhdhr_status_dict[key] }}</div>
-        </div>
+      <tr>
+          <td class="rTableCell">{{ key }}</td>
+          <td class="rTableCell">{{ fhdhr_status_dict[key] }}</td>
+      </tr>
       {% endfor %}
 
+    </tbody>
+    </table>
     </div>
 {% endblock %}

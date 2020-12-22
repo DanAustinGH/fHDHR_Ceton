@@ -10,48 +10,50 @@
       {% endfor %}
     </p>
 
-    <div class="rTable" >
-      <div class="rTableHeading">
-	      {% if source in ["blocks", "origin", fhdhr.config.dict["main"]["dictpopname"]] %}
-            <div class="rTableHead">Play</div>
-          {% endif %}
-	  <div class="rTableHead">Channel Name</div>
-	  <div class="rTableHead">Channel Number</div>
-	  <div class="rTableHead">Channel Thumbnail</div>
-	  <div class="rTableHead">Content Title</div>
-	  <div class="rTableHead">Content Thumbnail</div>
-	  <div class="rTableHead">Content Description</div>
-	  <div class="rTableHead">Start Time (UTC)</div>
-	  <div class="rTableHead">End Time (UTC)</div>
-	  <div class="rTableHead">Content Remaining Time</div>
-        </div>
-
-      {% set rowCount = namespace(value=1) %}
-      {% for chan_dict in chan_guide_list %}
-      {% if (rowCount.value % 2) %}
-          <div class="rTableRow">
-      {% else %}
-          <div class="rTableRowAlternate">
-      {% endif %}
-
+    <div class=container">
+    <table class="table-scroll">
+    <thead>
+      <tr>
           {% if source in ["blocks", "origin", fhdhr.config.dict["main"]["dictpopname"]] %}
-          <div class="rTableCell"> 
+            <th>Play</th>
+          {% endif %}
+	  <th>Channel Name</th>
+	  <th>Channel Number</th>
+	  <th>Channel Thumbnail</th>
+	  <th>Content Title</th>
+	  <th>Content Thumbnail</th>
+	  <th>Content Description</th>
+	  <th>Start Time (UTC)</th>
+	  <th>End Time (UTC)</th>
+	  <th>Content Remaining Time</th>
+      </tr>
+    </thead>
+
+    <tbody class="body-half-screen">
+      {% for chan_dict in chan_guide_list %}
+      <tr>
+          {% if source in ["blocks", "origin", fhdhr.config.dict["main"]["dictpopname"]] %}
+          <td> 
               {% if chan_dict["enabled"] %}
                 <a href="{{ chan_dict["play_url"] }}">Play</a>
+              {% else %}
+	        <a href="{{ chan_dict["play_url"] }}" style="visibility:hidden">Play</a>
               {% endif %}
-            </div>
+            </td>
           {% endif %}
-          <div class="rTableCell">{{ chan_dict["name"] }}</div>
-	  <div class="rTableCell">{{ chan_dict["number"] }}</div>
-          <div class="rTableCell">img src="{{ chan_dict["chan_thumbnail"] }}" alt="{{ chan_dict["name"] }}" width="100" height="100"></div>
-	  <div class="rTableCell">{{ chan_dict["listing_title"] }}</div>
-	  <div class="rTableCell"><img src="{{ chan_dict["listing_thumbnail"] }}" alt="{{ chan_dict["listing_title"] }}" width="100" height="100"></div>
-	  <div class="rTableCell">{{ chan_dict["listing_description"] }}</div>
-	  <div class="rTableCell">{{ chan_dict["listing_time_start"] }}</div>
-	  <div class="rTableCell">{{ chan_dict["listing_time_end"] }}</div>
-	  <div class="rTableCell">{{ chan_dict["listing_remaining_time"] }}</div>
-        </div>
-	{% set rowCount.value = rowCount.value+ 1 %}
+          <td>{{ chan_dict["name"] }}</td>
+	  <td>{{ chan_dict["number"] }}</td>
+          <td><img src="{{ chan_dict["chan_thumbnail"] }}" alt="{{ chan_dict["name"] }}" width="100" height="100"></td>
+	  <td>{{ chan_dict["listing_title"] }}</td>
+	  <td><img src="{{ chan_dict["listing_thumbnail"] }}" alt="{{ chan_dict["listing_title"] }}" width="100" height="100"></td>
+	  <td>{{ chan_dict["listing_description"] }}</td>
+	  <td>{{ chan_dict["listing_time_start"] }}</td>
+	  <td>{{ chan_dict["listing_time_end"] }}</td>
+	  <td>{{ chan_dict["listing_remaining_time"] }}</td>
+      </tr>
       {% endfor %}
+    </tbody>
+    </table>
+    </div>
 
 {% endblock %}

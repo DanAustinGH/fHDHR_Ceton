@@ -14,22 +14,23 @@
       </div>
       <br>
 
-    <div class="rTable center" style="width:50%">
-      <div class="rTableHeading">
-          <div class="rTableHead">Name</div>
-	  <div class="rTableHead">Location</div>
-	  <div class="rTableHead">Joined</div>
-	  <div class="rTableHead">Options</div>
-        </div>
+    <div class=container">
+    <table class="table-medium center action-col">
+    <tbody>
 
-      {% for location in locations_list %}
-        <div class="rTableRow">
-	    <div class="rTableCell">{{ location["name"] }}</div>
-            <div class="rTableCell">{{ location["location"] }}</div>
-	    <div class="rTableCell">{{ location["joined"] }}</div>
+	<tr>
+          <th>Name</th>
+	  <th>Location</th>
+	  <th>Joined</th>
+	  <th>Options</th>
+        </tr>
 
-            <div class="rTableCell"> 
-
+	{% for location in locations_list %}
+	<tr>
+	    <td>{{ location["name"] }}</td>
+            <td>{{ location["location"] }}</td>
+	    <td>{{ location["joined"] }}</td>
+            <td> 
               {% if location["joined"] in ["True", "False"] %}
                 <button onclick="OpenLink('{{ location["location"] }}')">Visit</a></button>
               {% endif %}
@@ -40,9 +41,11 @@
                 <button onclick="OpenLink('/api/cluster?method=add&location={{ location["url_query"] }}&redirect=%2Fcluster')">Add</a></button>
               {% endif %}
 
-            </div>
-          </div>
+            </td>
+          </tr>
       {% endfor %}
+    </tbody>
+    </table>
     </div>
     {% endif %}
 
