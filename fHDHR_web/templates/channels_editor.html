@@ -78,57 +78,53 @@
     </div>
 
 
-    <div class="rTable" >
-      <div class="rTableHeading">
-        <div class="rTableHead">Channel Name</div>
-        <div class="rTableHead">Channel CallSign</div>
-        <div class="rTableHead">Channel Number</div>
-        <div class="rTableHead">Channel Thumbnail</div>
-        <div class="rTableHead">Enabled</div>
-        <div class="rTableHead">Favorite</div>
-        <div class="rTableHead">Actions</div>
-      </div>
+    <div class="container">
+      <table class="table-scroll text-edit-cols">
+      <thead> 
+      <tr>
+        <th>Channel Name</th>
+        <th>Channel CallSign</th>
+        <th>Channel Number</th>
+        <th>Channel Thumbnail</th>
+        <th>Enabled</th>
+        <th>Favorite</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
 
-    {% set rowCount = namespace(value=1) %}
+    <tbody class="body-half-screen">
     {% for chan_dict in channelslist %}
-
-    {% if (rowCount.value % 2) %}
-         <div class="rTableRow">
-    {% else %}
-         <div class="rTableRowAlternate">
-    {% endif %}
-             <input type="hidden" name="id" class="channels" value={{ chan_dict["id"] }}>
-             <div class="rTableCell"><input type="text" class="channels" name="name" value="{{ chan_dict["name"] }}"></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="callsign" value="{{ chan_dict["callsign"] }}"></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="number" value="{{ chan_dict["number"] }}"></div>
-             <div class="rTableCell"><input type="text"  class="channels" name="thumbnail" value="{{ chan_dict["thumbnail"] }}"></div>
-             <div class="rTableCell" style="text-align:auto">
-              {% if chan_dict["enabled"]  %}
-                    <input type="checkbox"  class="channels" name="enabled" style="center" value=True checked>
-              {% else %}
-                    <input type="checkbox"  class="channels" name="enabled" style="center" value=True >
-              {% endif %}
-             </div>
-             <div class="rTableCell" style="text-align:auto">
-              {% if chan_dict["favorite"]  %}
-                    <input type="checkbox"  class="channels" name="favorite" style="margin: auto;" value=1 checked>
-              {% else %}
-                    <input type="checkbox"  class="channels" name="favorite" style="margin: auto;" value=1 >
-              {% endif %}
-             </div>
-             <div class="rTableCell"> 
+        <tr> 
+          <td><input type="hidden" name="id" class="channels" value={{ chan_dict["id"] }}>
+          <input type="text" class="channels" name="name" value="{{ chan_dict["name"] }}"></td>
+          <td><input type="text"  class="channels" name="callsign" value="{{ chan_dict["callsign"] }}"></td>
+          <td><input type="text"  class="channels" name="number" value="{{ chan_dict["number"] }}"></td>
+          <td><input type="text"  class="channels" name="thumbnail" value="{{ chan_dict["thumbnail"] }}"></td>
+          {% if chan_dict["enabled"]  %}
+	  <td><input type="checkbox"  class="channels" name="enabled" value=True checked></td>
+          {% else %}
+	  <td><input type="checkbox"  class="channels" name="enabled" value=True ></td>
+          {% endif %}
+          {% if chan_dict["favorite"]  %}
+	  <td><input type="checkbox"  class="channels" name="favorite" value=1 checked></td>
+          {% else %}
+	  <td><input type="checkbox"  class="channels" name="favorite" value=1 ></td>
+          {% endif %}
+	  <td>
              <form method="post" action="/api/channels?method=update&redirect=%2Fchannels_editor">
-                <input type="hidden" class="reset" name="id" value="{{ chan_dict["id"] }}">
-                <input type="hidden" class="reset" name="name" value="{{ chan_dict["origin_name"] }}">
-                <input type="hidden" class="reset" name="callsign" value="{{ chan_dict["origin_callsign"] }}">
-                <input type="hidden" class="reset" name="number" value="{{ chan_dict["origin_number"] }}">
-                <input type="hidden" class="reset" name="thumbnail" value="{{ chan_dict["origin_thumbnail"] }}">
-                <input type="hidden" class="reset" name="enabled" value=True>
-                <input type="submit"  value="Reset">
-             </form></div>
-         </div>
+             <input type="hidden" class="reset" name="id" value="{{ chan_dict["id"] }}">
+             <input type="hidden" class="reset" name="name" value="{{ chan_dict["origin_name"] }}">
+             <input type="hidden" class="reset" name="callsign" value="{{ chan_dict["origin_callsign"] }}">
+             <input type="hidden" class="reset" name="number" value="{{ chan_dict["origin_number"] }}">
+             <input type="hidden" class="reset" name="thumbnail" value="{{ chan_dict["origin_thumbnail"] }}">
+             <input type="hidden" class="reset" name="enabled" value=True>
+              <input type="submit"  value="Reset">
+             </form>
+	  </td>
+         </tr>
 
-    {% set rowCount.value = rowCount.value+ 1 %}
     {% endfor %}
+    </tbody>
+    </table>
     </div>
 {% endblock %}

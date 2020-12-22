@@ -24,56 +24,56 @@
     </div>
     <br>
 
-    <div class="rTable" >
-      <div class="rTableHeading">
-        <div class="rTableHead">Play</div>
-        <div class="rTableHead">Channel Name</div>
-        <div class="rTableHead">Channel CallSign</div>
-        <div class="rTableHead">Channel Number</div>
-        <div class="rTableHead">Channel Thumbnail</div>
-        <div class="rTableHead">Enabled</div>
-        <div class="rTableHead">Favorite</div>
-      </div>
+    <div class=container">
+    <table class="table-scroll small-first-col">
+      <thead>
+      <tr>
+        <th>Play</div>
+        <th>Channel Name</th>
+        <th>Channel CallSign</th>
+        <th>Channel Number</th>
+        <th>Channel Thumbnail</th>
+        <th>Enabled</th>
+        <th>Favorite</th>
+      </tr>
+      </thead>
 
-    {% set rowCount = namespace(value=1) %}
+    <tbody class="body-half-screen">
     {% for chan_dict in channelslist %}
+    <tr>
 
-
-    {% if (rowCount.value % 2) %}
-      <div class="rTableRow">
-    {% else %}
-         <div class="rTableRowAlternate">
-     {% endif %}
-
-         <div class="rTableCell">
+         <td>
           {% if chan_dict["enabled"] %}
             <a href="{{ chan_dict["play_url"] }}">Play</a>
+	  {% else %}
+	    <a href="{{ chan_dict["play_url"] }}" style="visibility:hidden">Play</a>
           {% endif %}
-         </div>
+         </td>
 
-        <div class="rTableCell">{{ chan_dict["name"] }}</div>
-        <div class="rTableCell">{{ chan_dict["callsign"] }}</div>
-        <div class="rTableCell">{{ chan_dict["number"] }}</div>
+        <td>{{ chan_dict["name"] }}</td>
+        <td>{{ chan_dict["callsign"] }}</td>
+        <td>{{ chan_dict["number"] }}</td>
 
         {% if chan_dict["thumbnail"]  %}
-        <div class="rTableCell"><img src="{{ chan_dict["thumbnail"] }}" alt="{{ chan_dict["name"] }}" width="100" height="100"></div>
+        <td><img src="{{ chan_dict["thumbnail"] }}" alt="{{ chan_dict["name"] }}" width="100" height="100"></td>
         {% else %}
-        <div class="rTableCell">No Image Available</div>
+        <td>No Image Available</td>
         {% endif %}
 
         {% if chan_dict["enabled"]  %}
-        <div class="rTableCell">Enabled</div>
+        <td>Enabled</td>
         {% else %}
-        <div class="rTableCell">Disabled</div>
+        <td>Disabled</td>
         {% endif %}
 
         {% if chan_dict["favorite"]  %}
-        <div class="rTableCell">Yes</div>
+        <td>Yes</td>
         {% else %}
-         <div class="rTableCell">No</div>
+         <td>No</td>
         {% endif %}
-      </div>
-    {% set rowCount.value = rowCount.value+ 1 %}
+      </tr>
     {% endfor %}
-    </div>
+    </tbody>
+    </table>
+  </div>
 {% endblock %}
