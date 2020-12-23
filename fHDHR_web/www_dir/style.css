@@ -100,7 +100,7 @@
 .table-settings td,.table-settings th{
   flex: 1 1 0;
   display: block;
-  padding: 1rem;
+  padding: .25rem;
 }
 .table-scroll thead{
   background-color: #f1f1f1;  
@@ -126,7 +126,7 @@
 .table-scroll td,.table-scroll th{
   flex: 1 1 0;
   display: block;
-  padding: 1rem;
+  padding: .25rem;
   text-align:center;
 }
 
