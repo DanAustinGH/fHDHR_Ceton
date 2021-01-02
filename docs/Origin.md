@@ -17,4 +17,5 @@ This varient of fHDHR connects to Ceton TV tuners
 Usage with fHDHR requires:
 
 * a Ceton TV tuner
+* FFMPEG
 

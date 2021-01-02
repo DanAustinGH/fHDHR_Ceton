@@ -1,4 +1,6 @@
-from flask import request, render_template
+from flask import request, render_template, session
+
+from fHDHR.tools import channel_sort
 
 
 class Channels_Editor_HTML():
@@ -13,8 +15,8 @@ class Channels_Editor_HTML():
 
     def get(self, *args):
 
-        channelslist = []
-        for fhdhr_id in list(self.fhdhr.device.channels.list.keys()):
+        channelslist = {}
+        for fhdhr_id in [x["id"] for x in self.fhdhr.device.channels.get_channels()]:
             channel_obj = self.fhdhr.device.channels.list[fhdhr_id]
             channel_dict = channel_obj.dict.copy()
 
@@ -22,9 +24,13 @@ class Channels_Editor_HTML():
             channel_dict["chan_thumbnail"] = channel_obj.thumbnail
             channel_dict["play_url"] = channel_obj.play_url
 
-            channelslist.append(channel_dict)
+            channelslist[channel_dict["number"]] = channel_dict
 
-        channelslist = sorted(channelslist, key=lambda i: i['number'])
+        # Sort the channels
+        sorted_channel_list = channel_sort(list(channelslist.keys()))
+        sorted_chan_guide = []
+        for channel in sorted_channel_list:
+            sorted_chan_guide.append(channelslist[channel])
 
         if self.fhdhr.config.dict["web_ui"]["advanced"]:
             return render_template('channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=channelslist)
