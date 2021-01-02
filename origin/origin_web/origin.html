@@ -9,7 +9,7 @@
     <tbody>
       <tr>
         <td>Setup</td>
-	<td>{{ origin_status_dict['Setup'] }}</td>
+        <td>{{ origin_status_dict['Setup'] }}</td>
       </tr>
       <tr>
         <td>Temperature</td>
@@ -18,15 +18,15 @@
       </tbody>
 
       <table class="table-medium center">
-	<thead>
+        <thead>
           <tr>
             <th>Tuner</th>
-	    <th>State</th>
-	    <th>Signal</th>
-	    <th>SNR</th>
-	    <th>Action</th>
-	  </tr>
-	</thead>
+             <th>State</th>
+             <th>Signal</th>
+             <th>SNR</th>
+             <th>Action</th>
+          </tr>
+        </thead>
 
       <tbody>
       {% for key in list(origin_status_dict.keys()) 
@@ -36,12 +36,12 @@
            <td>{{ origin_status_dict[key]['State'] }}</td>
            <td>{{ origin_status_dict[key]['Signal'] }}</td>
            <td>{{ origin_status_dict[key]['SNR'] }}</td>
-	  {% if origin_status_dict[key]['State'] == "STOPPED" %}
+          {% if origin_status_dict[key]['State'] == "STOPPED" %}
             <td></td>
-	  {% endif %}
-	  {% if origin_status_dict[key]['State'] == "PLAYING" %}
+          {% endif %}
+          {% if origin_status_dict[key]['State'] == "PLAYING" %}
            <td><button onclick="OpenLink('/api/origin?method=close&tuner={{ key[5:] }}&redirect=%2Forigin')">Close</a></button></td>
-	  {% endif %}
+          {% endif %}
         </tr>
       {% endfor %}
      </tbody>
