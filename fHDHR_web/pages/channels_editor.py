@@ -33,6 +33,6 @@ class Channels_Editor_HTML():
             sorted_chan_guide.append(channelslist[channel])
 
         if self.fhdhr.config.dict["web_ui"]["advanced"]:
-            return render_template('channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=channelslist)
+            return render_template('channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=sorted_chan_guide)
         else:
-            return render_template('legacy_channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=channelslist)
+            return render_template('legacy_channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=sorted_chan_guide)
