@@ -27,6 +27,6 @@ class Channels_Editor_HTML():
         channelslist = sorted(channelslist, key=lambda i: i['number'])
 
         if self.fhdhr.config.dict["web_ui"]["advanced"]:
-            return render_template('channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=sorted_chan_guide)
+            return render_template('channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=channelslist)
         else:
-            return render_template('legacy_channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=sorted_chan_guide)
+            return render_template('legacy_channels_editor.html', request=request, fhdhr=self.fhdhr, channelslist=channelslist)
