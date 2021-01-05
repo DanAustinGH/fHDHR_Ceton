@@ -21,7 +21,7 @@ class Origin_API():
         redirect_url = request.args.get('redirect', default=None, type=str)
 
         if method == "close":
-            self.fhdhr.originwrapper.originservice.status_dict.startstop_ceton_tuner(self, tuner_number, 0)
+            self.fhdhr.originwrapper.originservice.startstop_ceton_tuner(tuner_number, 0)
 
         if redirect_url:
             return redirect(redirect_url)
